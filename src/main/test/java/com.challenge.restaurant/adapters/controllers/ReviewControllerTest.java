@@ -1,6 +1,6 @@
 package com.challenge.restaurant.adapters.controller;
 
-import com.challenge.restaurant.domain.model.Review;
+import com.challenge.restaurant.domain.entity.Review;
 import com.challenge.restaurant.domain.service.ReviewService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

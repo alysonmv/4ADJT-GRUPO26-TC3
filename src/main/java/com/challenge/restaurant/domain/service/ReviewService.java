@@ -1,7 +1,7 @@
 package com.challenge.restaurant.domain.service;
 
-import com.challenge.restaurant.domain.model.Review;
-import com.challenge.restaurant.domain.repository.ReviewRepository;
+import com.challenge.restaurant.domain.entity.Review;
+import com.challenge.restaurant.infra.repository.ReviewRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

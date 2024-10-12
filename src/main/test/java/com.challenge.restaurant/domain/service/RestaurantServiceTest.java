@@ -1,7 +1,7 @@
 package com.challenge.restaurant.service;
 
-import com.challenge.restaurant.domain.model.Restaurant;
-import com.challenge.restaurant.domain.repository.RestaurantRepository;
+import com.challenge.restaurant.domain.entity.Restaurant;
+import com.challenge.restaurant.infra.repository.RestaurantRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

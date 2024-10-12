@@ -1,6 +1,6 @@
-package com.challenge.restaurant.domain.output.restaurant;
+package com.challenge.restaurant.domain.output.reservation;
 
-import com.challenge.restaurant.domain.entity.restaurant.Restaurant;
+import com.challenge.restaurant.domain.entity.reservation.Reservation;
 import com.challenge.restaurant.domain.generic.OutputInterface;
 import com.challenge.restaurant.domain.generic.output.OutputStatus;
 import lombok.Data;
@@ -12,17 +12,17 @@ import lombok.Setter;
 @RequiredArgsConstructor
 @Getter
 @Setter
-public class CreateRestaurantOutput implements OutputInterface {
+public class CreateReservationOutput implements OutputInterface {
 
-    private Restaurant restaurant;
+    private Reservation reservation;
 
-    public CreateRestaurantOutput(Restaurant restaurantEntity){
-        this.restaurant = restaurantEntity;
+    public CreateReservationOutput(Reservation reservationEntity) {
+        this.reservation = reservationEntity;
     }
 
     @Override
     public Object getBody() {
-        return this.restaurant;
+        return this.reservation;
     }
 
     @Override

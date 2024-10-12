@@ -19,4 +19,9 @@ public class CreateRestaurantRepository implements CreateRestaurantInterface {
         return new Restaurant (restaurantModel.getId(), restaurantModel.getName(), restaurantModel.getCnpj(),
                 restaurantModel.getLocation(), restaurantModel.getCuisineType(), restaurantModel.getCapacity(), restaurantModel.getOpeningHours());
     }
+
+    @Override
+    public Restaurant createRestaurant(Restaurant restaurant) {
+        return null;
+    }
 }

@@ -1,6 +1,6 @@
 package com.challenge.restaurant.domain.service;
 
-import com.challenge.restaurant.domain.entity.Reservation;
+import com.challenge.restaurant.domain.entity.reservation.Reservation;
 import com.challenge.restaurant.infra.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
 

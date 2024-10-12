@@ -14,4 +14,5 @@ public interface RestaurantRepository extends JpaRepository<RestaurantModel, Lon
     List<Restaurant> findByLocationContainingIgnoreCase(String location);
 
     List<Restaurant> findByCuisineTypeContainingIgnoreCase(String cuisineType);
+    List<RestaurantModel> findByNameAndLocationAndCuisineType(String name, String location, String cuisineType);
 }

@@ -4,29 +4,21 @@ import com.challenge.restaurant.domain.entity.restaurant.Restaurant;
 import com.challenge.restaurant.domain.generic.OutputInterface;
 import com.challenge.restaurant.domain.generic.output.OutputStatus;
 import lombok.Data;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+
+import java.util.List;
 
 @Data
-@RequiredArgsConstructor
-@Getter
-@Setter
-public class CreateRestaurantOutput implements OutputInterface {
+public class RestaurantSearchOutput implements OutputInterface {
 
-    private Restaurant restaurant;
-
-    public CreateRestaurantOutput(Restaurant restaurantEntity){
-        this.restaurant = restaurantEntity;
-    }
+    private final List<Restaurant> restaurants;
 
     @Override
     public Object getBody() {
-        return this.restaurant;
+        return this.restaurants;
     }
 
     @Override
     public OutputStatus getOutputStatus() {
-        return null;
+        return new OutputStatus(200, "OK", "Search completed successfully.");
     }
 }

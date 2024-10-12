@@ -1,4 +1,4 @@
-package com.challenge.restaurant.domain.entity;
+package com.challenge.restaurant.domain.entity.user;
 
 import jakarta.persistence.*;
 import lombok.*;

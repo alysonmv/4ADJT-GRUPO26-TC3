@@ -1,7 +1,7 @@
 package com.challenge.restaurant.domain.service;
 
-import com.challenge.restaurant.domain.model.User;
-import com.challenge.restaurant.domain.repository.UserRepository;
+import com.challenge.restaurant.domain.entity.User;
+import com.challenge.restaurant.infra.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

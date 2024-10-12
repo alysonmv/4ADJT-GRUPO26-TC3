@@ -1,4 +1,4 @@
-package com.challenge.restaurant.domain.model;
+package com.challenge.restaurant.domain.entity;
 
 import org.junit.jupiter.api.Test;
 

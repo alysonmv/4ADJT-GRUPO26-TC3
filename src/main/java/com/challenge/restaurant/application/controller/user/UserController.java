@@ -1,6 +1,6 @@
 package com.challenge.restaurant.application.controller.user;
 
-import com.challenge.restaurant.domain.entity.User;
+import com.challenge.restaurant.domain.entity.user.User;
 import com.challenge.restaurant.domain.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

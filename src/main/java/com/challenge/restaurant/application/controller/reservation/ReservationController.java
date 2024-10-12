@@ -1,45 +1,53 @@
 package com.challenge.restaurant.application.controller.reservation;
 
-import com.challenge.restaurant.domain.entity.Reservation;
-import com.challenge.restaurant.domain.service.ReservationService;
+import com.challenge.restaurant.application.controller.reservation.request.ReservationRequest;
+import com.challenge.restaurant.application.response.GenericResponse;
+import com.challenge.restaurant.application.response.PresenterResponse;
+import com.challenge.restaurant.domain.generic.OutputInterface;
+import com.challenge.restaurant.domain.input.ReservationInput;
+import com.challenge.restaurant.domain.output.reservation.CreateReservationOutput;
+import com.challenge.restaurant.domain.present.reservation.create.IndentifyReservationPresenter;
+import com.challenge.restaurant.domain.useCase.reservation.CreateReservationUseCase;
+import com.challenge.restaurant.infra.adapter.repository.CreateReservationRepository;
+import com.challenge.restaurant.infra.repository.ReservationRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/reservations")
+@RequiredArgsConstructor
+@RequestMapping("/reservation/create")
 public class ReservationController {
 
-    private final ReservationService reservationService;
-
-    public ReservationController(ReservationService reservationService) {
-        this.reservationService = reservationService;
-    }
+    private final ReservationRepository reservationRepository;
 
     @PostMapping
-    public ResponseEntity<Reservation> makeReservation(@RequestBody Reservation reservation) {
-        return ResponseEntity.ok(reservationService.makeReservation(reservation));
-    }
+    @Operation(tags = {"reservation"})
+    public ResponseEntity<Object> createReservation(@RequestBody ReservationRequest reservationRequest) throws Exception {
 
-    @GetMapping("/restaurant/{restaurantId}")
-    public ResponseEntity<List<Reservation>> getReservationsByRestaurant(@PathVariable Long restaurantId) {
-        return ResponseEntity.ok(reservationService.getReservationsByRestaurant(restaurantId));
-    }
+        ReservationInput reservationInput = new ReservationInput(
+                reservationRequest.restaurantId(),
+                reservationRequest.customerName(),
+                reservationRequest.reservationDate(),
+                reservationRequest.reservationTime(),
+                reservationRequest.numberOfGuests()
+        );
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Reservation> getReservationById(@PathVariable Long id) {
-        return ResponseEntity.ok(reservationService.getReservationById(id));
-    }
+        CreateReservationUseCase useCase = new CreateReservationUseCase(new CreateReservationRepository(reservationRepository));
+        useCase.create(reservationInput);
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Reservation> updateReservation(@PathVariable Long id, @RequestBody Reservation reservation) {
-        return ResponseEntity.ok(reservationService.updateReservation(id, reservation));
-    }
+        OutputInterface outputInterface = useCase.getCreateReservationOutputInterface();
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> cancelReservation(@PathVariable Long id) {
-        reservationService.cancelReservation(id);
-        return ResponseEntity.noContent().build();
+        if (outputInterface.getOutputStatus().getCode() != 200) {
+            return new GenericResponse().response(outputInterface);
+        }
+
+        IndentifyReservationPresenter presenter = new IndentifyReservationPresenter((CreateReservationOutput) outputInterface);
+
+        return new PresenterResponse().response(presenter);
     }
 }
